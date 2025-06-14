@@ -4,8 +4,8 @@ import { IRegistroRepository } from '../interfaces/IRegistroRepository';
 export class RegistroService {
   constructor(private readonly repository: IRegistroRepository) {}
 
-  async getAll() {
-    return await this.repository.getAll();
+  async getAll(filters: { initialDate?: Date; finalDate?: Date }) {
+    return await this.repository.getAll(filters);
   }
 
   async getById(id: number) {

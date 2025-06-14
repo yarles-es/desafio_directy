@@ -10,8 +10,28 @@ export class PrismaRegistroRepository implements IRegistroRepository {
     this.prisma = new PrismaClient();
   }
 
-  async getAll(): Promise<RegistroEntity[]> {
+  async getAll(filters?: { initialDate?: Date; finalDate?: Date }): Promise<RegistroEntity[]> {
+    const where: any = {};
+
+    if (filters?.initialDate && filters?.finalDate) {
+      where.createdAt = {
+        gte: filters.initialDate,
+        lte: filters.finalDate,
+      };
+    } else if (filters?.initialDate) {
+      where.createdAt = {
+        gte: filters.initialDate,
+      };
+    } else if (filters?.finalDate) {
+      where.createdAt = {
+        lte: filters.finalDate,
+      };
+    }
+
+    console.log('where', where);
+
     return await this.prisma.registro.findMany({
+      where,
       select: {
         id: true,
         time: true,

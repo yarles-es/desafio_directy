@@ -6,9 +6,19 @@ import { RegistroService } from '../services/RegistroService';
 export class RegistroController {
   constructor(private readonly service: RegistroService) {}
 
-  async getAll(_req: Request, res: Response, next: NextFunction): Promise<void> {
+  async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const registros = await this.service.getAll();
+      const filters = {
+        initialDate: req.query.initialDate
+          ? new Date(`${req.query.initialDate}T00:00:00`)
+          : undefined,
+
+        finalDate: req.query.finalDate
+          ? new Date(`${req.query.finalDate}T23:59:59.999`)
+          : undefined,
+      };
+
+      const registros = await this.service.getAll(filters);
 
       const registrosFormatted = registros.map((registro) => RegistroMapper.toDTO(registro));
       res.json(registrosFormatted);

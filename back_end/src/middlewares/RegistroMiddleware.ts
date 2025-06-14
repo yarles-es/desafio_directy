@@ -2,7 +2,38 @@ import { NextFunction, Request, Response } from 'express';
 import { CreateRegistroDTO, UpdateRegistroDTO } from '../dtos/RegistroDTO';
 import { BadRequestError } from './async.error';
 
+type RegistroQueryParams = {
+  initialDate?: string;
+  finalDate?: string;
+};
+
 export class RegistroMiddleware {
+  static validateGetAll(req: Request, _res: Response, next: NextFunction) {
+    try {
+      const { initialDate, finalDate } = req.query as RegistroQueryParams;
+
+      if (initialDate && isNaN(Date.parse(initialDate as string))) {
+        throw new BadRequestError('Data inicial inválida');
+      }
+
+      if (finalDate && isNaN(Date.parse(finalDate as string))) {
+        throw new BadRequestError('Data final inválida');
+      }
+
+      if (
+        initialDate &&
+        finalDate &&
+        new Date(initialDate as string) > new Date(finalDate as string)
+      ) {
+        throw new BadRequestError('A data inicial não pode ser maior que a data final');
+      }
+
+      next();
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static validateCreate(req: Request, _res: Response, next: NextFunction) {
     try {
       const { time } = req.body as CreateRegistroDTO;
