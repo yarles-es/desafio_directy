@@ -196,12 +196,14 @@ const CounterTablePage = () => {
         </div>
       </DefaultContainer>
 
-      <ModalUpdateRegister
-        isOpen={modal.isOpen}
-        onClose={() => setModal({ id: 0, isOpen: false })}
-        id={modal.id}
-        refetch={refetch}
-      />
+      {modal.id > 0 && (
+        <ModalUpdateRegister
+          isOpen={modal.isOpen}
+          onClose={() => setModal({ id: 0, isOpen: false })}
+          id={modal.id}
+          refetch={refetch}
+        />
+      )}
     </DefaultPage>
   );
 };

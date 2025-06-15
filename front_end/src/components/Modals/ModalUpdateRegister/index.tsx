@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getRegisterById, updateRegister } from "../../../api/registers_api";
 import useAlert from "../../../hooks/useAlert";
 import Button from "../../Buttons/Button";
@@ -23,10 +23,10 @@ const ModalUpdateRegister: React.FC<Props> = ({
   const { data: register } = useQuery({
     queryKey: ["register", id],
     queryFn: () => getRegisterById(id),
-    enabled: isOpen && id > 0,
+    enabled: id > 0,
   });
 
-  const [date, setDate] = useState<string>(register?.createdAt || "");
+  const [date, setDate] = useState<string>("");
 
   const { mutate } = useMutation({
     mutationFn: (newDate: string) => updateRegister(id, { createdAt: newDate }),
@@ -47,6 +47,12 @@ const ModalUpdateRegister: React.FC<Props> = ({
       alert("Por favor, selecione uma data válida.", "error");
     }
   };
+
+  useEffect(() => {
+    if (register?.createdAt) {
+      setDate(register.createdAt);
+    }
+  }, [register?.createdAt]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} onCloseClicked={true}>
