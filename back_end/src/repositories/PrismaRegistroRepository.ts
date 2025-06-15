@@ -28,8 +28,6 @@ export class PrismaRegistroRepository implements IRegistroRepository {
       };
     }
 
-    console.log('where', where);
-
     return await this.prisma.registro.findMany({
       where,
       select: {

@@ -17,7 +17,13 @@ export class RegistroService {
   }
 
   async update(id: number, data: UpdateRegistroDTO) {
-    return await this.repository.update(id, data);
+    const dateOnly = data.createdAt?.toISOString().split('T')[0];
+    const currentDate = new Date(dateOnly + 'T03:00:00Z');
+    const newData: UpdateRegistroDTO = {
+      ...data,
+      createdAt: currentDate,
+    };
+    return await this.repository.update(id, newData);
   }
 
   async delete(id: number) {
