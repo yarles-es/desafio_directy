@@ -3,12 +3,17 @@ import { genericRequest } from "./@genericRequest";
 
 export const getallRegisters = async (
   initialDate?: string,
-  FinalDate?: string
+  finalDate?: string
 ) => {
+  console.log(
+    `/?${initialDate ? `initialDate=${initialDate}` : ""}${
+      finalDate ? `&FinalDate=${finalDate}` : ""
+    }`
+  );
   return genericRequest<Register[]>(
     "get",
     `/?${initialDate ? `initialDate=${initialDate}` : ""}${
-      FinalDate ? `&FinalDate=${FinalDate}` : ""
+      finalDate ? `&finalDate=${finalDate}` : ""
     }`
   );
 };
@@ -23,7 +28,7 @@ export const createRegister = async (register: Pick<Register, "time">) => {
 
 export const updateRegister = async (
   id: number,
-  register: Pick<Register, "time" | "createdAt">
+  register: Pick<Register, "createdAt">
 ) => {
   return genericRequest<Register>("put", `/${id}`, register);
 };

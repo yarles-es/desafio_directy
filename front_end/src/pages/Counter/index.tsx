@@ -1,21 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { createRegister } from "../../api/registers_api";
-import Button from "../../components/Button";
+import Button from "../../components/Buttons/Button";
 import DefaultContainer from "../../components/DefaultContainer";
 import DefaultPage from "../../components/DefaultPage";
+import Nav from "../../components/Nav";
 import useAlert from "../../hooks/useAlert";
-
-function formatTime(ms: number): string {
-  const hrs = Math.floor(ms / 3600000);
-  const mins = Math.floor((ms % 3600000) / 60000);
-  const secs = Math.floor((ms % 60000) / 1000);
-  const millis = Math.floor((ms % 1000) / 100);
-
-  const pad = (n: number, len = 2) => String(n).padStart(len, "0");
-
-  return `${pad(hrs)}:${pad(mins)}:${pad(secs)}.${millis}`;
-}
+import { formatTime } from "../../utils/formatTime";
 
 const CounterPage = () => {
   const alert = useAlert();
@@ -66,6 +57,7 @@ const CounterPage = () => {
     <DefaultPage>
       <DefaultContainer>
         <div className="mb-4.5 flex flex-col gap-6 items-center justify-center text-center">
+          <Nav />
           <h1 className="text-2xl font-bold text-white">Contador de Tempo</h1>
 
           <p className="text-4xl font-extrabold text-[#219653] drop-shadow-lg">

@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import Button from "./components/Button";
+import Button from "./components/Buttons/Button";
 import DefaultContainer from "./components/DefaultContainer";
 import DefaultPage from "./components/DefaultPage";
+import Nav from "./components/Nav";
 
 function App() {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ function App() {
     <DefaultPage>
       <DefaultContainer>
         <div className="mb-4.5 flex flex-col gap-6 items-center justify-center text-center">
+          <Nav />
           <h1 className="text-2xl font-bold text-white">
             Bem vindo ao contador de tempo!
           </h1>
