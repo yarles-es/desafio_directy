@@ -5,11 +5,6 @@ export const getallRegisters = async (
   initialDate?: string,
   finalDate?: string
 ) => {
-  console.log(
-    `/?${initialDate ? `initialDate=${initialDate}` : ""}${
-      finalDate ? `&FinalDate=${finalDate}` : ""
-    }`
-  );
   return genericRequest<Register[]>(
     "get",
     `/?${initialDate ? `initialDate=${initialDate}` : ""}${
