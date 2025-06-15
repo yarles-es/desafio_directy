@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply font-sans font-normal text-base text-[#64748b]  relative z-1 bg-[#24303f] dark:text-[#aeb7c0];
+  }
+}
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Estilos da barra de rolagem para o modo escuro */
+  ::-webkit-scrollbar-track {
+    background: #1a202c;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #2d3748;
+    border: 3px solid #1a202c;
+  }
+
+  /* Para Firefox no modo escuro */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #2d3748 #1a202c;
+  }
+
+  .chat-height {
+    @apply h-[calc(100vh_-_8.125rem)] lg:h-[calc(100vh_-_5.625rem)];
+  }
+  .inbox-height {
+    @apply h-[calc(100vh_-_8.125rem)] lg:h-[calc(100vh_-_5.625rem)];
+  }
+}
