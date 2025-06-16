@@ -40,7 +40,7 @@ O repositório contém duas pastas principais:
 ### 1. Clone o projeto
 
 ```bash
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
+git clone https://github.com/yarles-es/desafio_directy
 cd nome-do-repositorio
 cd back_end
 npm install
