@@ -41,7 +41,6 @@ O repositório contém duas pastas principais:
 
 ```bash
 git clone https://github.com/yarles-es/desafio_directy
-cd nome-do-repositorio
 cd back_end
 npm install
 npm run dev
